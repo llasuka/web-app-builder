@@ -8,10 +8,5 @@
 #
 
 echo "[arakawa DEBUG] in run script execution"
-
-source /etc/profile.d/java.sh
-source /etc/profile.d/tomcat.sh
-
 set -e
-
-exec tomcat -D FOREGROUND
+exec systemctl start tomcat

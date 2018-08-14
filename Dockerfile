@@ -33,14 +33,14 @@ RUN chmod 755 /etc/systemd/system/tomcat.service
 #warファイルを移動
 COPY deployments/*.war /opt/tomcat/webapps
 
-# サービスの起動
-#systemctl start tomcat
-# runスクリプトで実行するためコメントアウト
+# s2iスクリプトをS2iBuild用のディレクトリにコピーする
+COPY s2i/bin/ /usr/libexec/s2i
 
-# firewallの設定 多分不要
-# firewall-cmd --add-service=http --permanent
-# firewall-cmd --add-service=https --permanent
-# firewall-cmd --add-service=ssh --permanent
-# firewall-cmd --reload
+# s2iスクリプトに実行権限を付与する
+RUN chmod +x /usr/libexec/s2i/*
 
+# ユーザとして、base-centos7イメージのデフォルトユーザーIDを指定する
+USER 1001
 
+# ホストとほかのコンテナがアクセスできるポートを8080に設定する
+EXPOSE 8080
