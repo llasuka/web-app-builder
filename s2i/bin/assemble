@@ -8,9 +8,7 @@
 #
 
 # パスを通す
-PATH=/tmp/src
-
 source /etc/profile.d/java.sh
 source /etc/profile.d/tomcat.sh
 
-cp $PATH/developments/*.war /opt/tomcat/webapps
+cp developments/*.war /opt/tomcat/webapps
