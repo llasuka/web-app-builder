@@ -7,8 +7,4 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-# パスを通す
-source /etc/profile.d/java.sh
-source /etc/profile.d/tomcat.sh
 
-cp developments/*.war /opt/tomcat/webapps

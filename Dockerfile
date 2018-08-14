@@ -30,6 +30,9 @@ RUN source /etc/profile.d/tomcat.sh
 COPY tools/tomcat.service /etc/systemd/system/
 RUN chmod 755 /etc/systemd/system/tomcat.service 
 
+#warファイルを移動
+COPY deployments/*.war /opt/tomcat/webapps
+
 # サービスの起動
 #systemctl start tomcat
 # runスクリプトで実行するためコメントアウト
