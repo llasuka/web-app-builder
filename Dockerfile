@@ -1,5 +1,5 @@
 # httpd-tomcat
-FROM centos:7
+FROM openshift/base-centos7
 
 # javaのインストール
 RUN set -x && \
@@ -19,7 +19,7 @@ RUN useradd -s /sbin/nologin tomcat
 RUN mkdir /usr/src/tomcat
 COPY tools/apache-tomcat-7.0.90.tar.gz /usr/src/tomcat
 RUN set -x && tar -xvf /usr/src/tomcat/apache-tomcat-7.0.90.tar.gz -C /opt/  && \
-chown -R tomcat. /opt/apache-tomcat-7.0.90 && \
+chmod 775 /opt/apache-tomcat-7.0.90/webapps && \
 ln -s /opt/apache-tomcat-7.0.90/ /opt/tomcat
 
 # Tomcatのパスを通す
@@ -27,20 +27,17 @@ RUN echo 'export CATALINA_HOME=/opt/tomcat'  >  /etc/profile.d/tomcat.sh
 RUN source /etc/profile.d/tomcat.sh
 
 # サービス定義ファイルを移動
-COPY tools/tomcat.service /etc/systemd/system/
-RUN chmod 755 /etc/systemd/system/tomcat.service 
+#COPY tools/tomcat.service /etc/systemd/system/
+#RUN chmod 755 /etc/systemd/system/tomcat.service 
 
 #warファイルを移動
-COPY deployments/*.war /opt/tomcat/webapps
+#COPY deployments/*.war /opt/tomcat/webapps
 
 # s2iスクリプトをS2iBuild用のディレクトリにコピーする
 COPY s2i/bin/ /usr/libexec/s2i
 
 # s2iスクリプトに実行権限を付与する
 RUN chmod +x /usr/libexec/s2i/*
-
-# ユーザとして、base-centos7イメージのデフォルトユーザーIDを指定する
-USER 1001
 
 # ホストとほかのコンテナがアクセスできるポートを8080に設定する
 EXPOSE 8080

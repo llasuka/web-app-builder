@@ -7,6 +7,6 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-echo "[arakawa DEBUG] in run script execution"
+echo "[run] id = $(echo `id`)"
 set -e
-exec systemctl start tomcat
+exec /opt/tomcat/bin/startup.sh
