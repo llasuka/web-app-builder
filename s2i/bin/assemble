@@ -1,0 +1,16 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 'httpd-tomcat' image.
+# The 'assemble' script builds your application source so that it is ready to run.
+#
+# For more information refer to the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+# パスを通す
+PATH=/tmp/src
+
+source /etc/profile.d/java.sh
+source /etc/profile.d/tomcat.sh
+
+cp $PATH/developments/*.war /opt/tomcat/webapps
