@@ -7,6 +7,8 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+echo "[arakawa DEBUG] in run script execution"
+
 source /etc/profile.d/java.sh
 source /etc/profile.d/tomcat.sh
 
