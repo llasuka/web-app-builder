@@ -11,7 +11,7 @@ LABEL io.k8s.description="Tomcat7 HTTP Serverr" \
     io.openshift.tags="builder,webserver,html,tomcat" \
     # this label tells s2i where to find its mandatory scripts
     # (run, assemble, save-artifacts)
-    io.openshift.s2i.scripts-url="image:///usr/libexec/s2i"
+    io.openshift.s2i.scripts-url="image:////usr/libexec/s2i/"
 
 # javaのインストール
 RUN set -x && \
@@ -31,7 +31,7 @@ RUN useradd -s /sbin/nologin tomcat
 RUN mkdir /usr/src/tomcat
 COPY tools/apache-tomcat-7.0.90.tar.gz /usr/src/tomcat
 RUN set -x && tar -xvf /usr/src/tomcat/apache-tomcat-7.0.90.tar.gz -C /opt/  && \
-chmod -R 775 /opt/apache-tomcat-7.0.90 && \
+chown -R 1001.1001 /opt/apache-tomcat-7.0.90 && \
 ln -s /opt/apache-tomcat-7.0.90/ /opt/tomcat
 
 # Tomcatのパスを通す
