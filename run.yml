@@ -1,0 +1,11 @@
+kind: "BuildConfig"
+apiversion: "v1"
+metadata:
+  name: "http-tomcat-build"
+spec:
+  runPolicy: "Serial"
+  source:
+    git:
+      uri: "https://github.com/llasuka/web-app-builder.git"
+      ref: "master"
+

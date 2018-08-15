@@ -9,5 +9,5 @@
 
 echo "[assemble] id = $(echo `id`)" 
 
-#cp /tmp/src/*.war /opt/tomcat/webapps
+cp /tmp/src/*.war /opt/tomcat/webapps
 

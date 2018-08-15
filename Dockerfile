@@ -11,7 +11,7 @@ LABEL io.k8s.description="Tomcat7 HTTP Serverr" \
     io.openshift.tags="builder,webserver,html,tomcat" \
     # this label tells s2i where to find its mandatory scripts
     # (run, assemble, save-artifacts)
-    io.openshift.s2i.scripts-url="image:////usr/libexec/s2i/"
+    io.openshift.s2i.scripts-url="image:///usr/libexec/s2i/"
 
 # javaのインストール
 RUN set -x && \
@@ -43,10 +43,11 @@ RUN source /etc/profile.d/tomcat.sh
 #RUN chmod 755 /etc/systemd/system/tomcat.service 
 
 # warファイルを移動
-COPY deployments/*.war /opt/tomcat/webapps
+#COPY deployments/*.war /opt/tomcat/webapps
 
 # s2iスクリプトをS2iBuild用のディレクトリにコピーする
-COPY s2i/bin/ /usr/libexec/s2i
+RUN mkdir /usr/libexec/s2i
+COPY s2i/bin/* /usr/libexec/s2i/
 
 # s2iスクリプトに実行権限を付与する
 RUN chmod +x /usr/libexec/s2i/*
