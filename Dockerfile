@@ -1,6 +1,18 @@
 # httpd-tomcat
 FROM openshift/base-centos7
 
+# Here you can specify the maintainer for the image that you're building
+LABEL maintainer="Asuka Arakawa  <arakawa.asuka.jri@outlook.jp>"
+
+# Set the labels that are used for OpenShift to describe the builder image.
+LABEL io.k8s.description="Tomcat7 HTTP Serverr" \
+    io.k8s.display-name="Tomcat7 HTTP Server" \
+    io.openshift.expose-services="8080:http" \
+    io.openshift.tags="builder,webserver,html,tomcat" \
+    # this label tells s2i where to find its mandatory scripts
+    # (run, assemble, save-artifacts)
+    io.openshift.s2i.scripts-url="image:///usr/libexec/s2i"
+
 # javaのインストール
 RUN set -x && \
 yum install -y yum-fastestmirror && \
@@ -30,8 +42,8 @@ RUN source /etc/profile.d/tomcat.sh
 #COPY tools/tomcat.service /etc/systemd/system/
 #RUN chmod 755 /etc/systemd/system/tomcat.service 
 
-#warファイルを移動
-#COPY deployments/*.war /opt/tomcat/webapps
+# warファイルを移動
+COPY deployments/*.war /opt/tomcat/webapps
 
 # s2iスクリプトをS2iBuild用のディレクトリにコピーする
 COPY s2i/bin/ /usr/libexec/s2i
@@ -40,6 +52,7 @@ COPY s2i/bin/ /usr/libexec/s2i
 RUN chmod +x /usr/libexec/s2i/*
 
 # Linuxデフォルトのユーザで実行
+RUN chmod g=u /etc/passwd
 USER 1001
 
 # ホストとほかのコンテナがアクセスできるポートを8080に設定する

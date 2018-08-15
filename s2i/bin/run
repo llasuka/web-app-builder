@@ -4,9 +4,7 @@
 # The run script executes the server that runs your application.
 #
 # For more information see the documentation:
-#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+# https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-echo "[run] id = $(echo `id`)"
-set -e
-exec /opt/tomcat/bin/startup.sh
+exec /opt/tomcat/bin/catalina.sh run
