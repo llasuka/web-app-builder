@@ -1,0 +1,14 @@
+#!/bin/bash -e
+cat <<EOF
+This is the Tocat-CentOS7 S2I image:
+To use it, install S2I: https://github.com/openshift/source-to-image
+
+Sample invocation:
+
+s2i build deployments/ httpd-tomcat httpd-tomcat-image
+
+You can then run the resulting image via:
+docker run -d -p 28080:8080 httpd-tomcat-image
+and see the test via http://localhost:28080
+EOF
+

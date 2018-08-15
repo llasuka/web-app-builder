@@ -57,3 +57,5 @@ USER 1001
 
 # ホストとほかのコンテナがアクセスできるポートを8080に設定する
 EXPOSE 8080
+
+CMD ["/usr/libexec/s2i/usage"]
