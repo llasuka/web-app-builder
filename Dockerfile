@@ -31,7 +31,6 @@ RUN useradd -s /sbin/nologin tomcat
 RUN mkdir /usr/src/tomcat
 COPY tools/apache-tomcat-7.0.90.tar.gz /usr/src/tomcat
 RUN set -x && tar -xvf /usr/src/tomcat/apache-tomcat-7.0.90.tar.gz -C /opt/  && \
-chown -R 1001.1001 /opt/apache-tomcat-7.0.90 && \
 chmod -R 775 /opt/apache-tomcat-7.0.90 && \
 ln -s /opt/apache-tomcat-7.0.90/ /opt/tomcat
 
