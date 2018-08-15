@@ -19,7 +19,7 @@ RUN useradd -s /sbin/nologin tomcat
 RUN mkdir /usr/src/tomcat
 COPY tools/apache-tomcat-7.0.90.tar.gz /usr/src/tomcat
 RUN set -x && tar -xvf /usr/src/tomcat/apache-tomcat-7.0.90.tar.gz -C /opt/  && \
-chmod 775 /opt/apache-tomcat-7.0.90/webapps && \
+chmod -R 775 /opt/apache-tomcat-7.0.90 && \
 ln -s /opt/apache-tomcat-7.0.90/ /opt/tomcat
 
 # Tomcatのパスを通す
@@ -38,6 +38,9 @@ COPY s2i/bin/ /usr/libexec/s2i
 
 # s2iスクリプトに実行権限を付与する
 RUN chmod +x /usr/libexec/s2i/*
+
+# Linuxデフォルトのユーザで実行
+USER 1001
 
 # ホストとほかのコンテナがアクセスできるポートを8080に設定する
 EXPOSE 8080
