@@ -7,4 +7,7 @@
 # https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-exec /opt/tomcat/bin/catalina.sh run
+source /etc/profile.d/java.sh
+source /etc/profile.d/tomcat.sh
+
+exec /opt/tomcat/bin/catalina.sh run &> /opt/tomcat/logs/catalina.out

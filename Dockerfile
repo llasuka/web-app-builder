@@ -37,6 +37,8 @@ ln -s /opt/apache-tomcat-7.0.90/ /opt/tomcat
 # Tomcatのパスを通す
 RUN echo 'export CATALINA_HOME=/opt/tomcat'  >  /etc/profile.d/tomcat.sh
 RUN source /etc/profile.d/tomcat.sh
+ENV CATALINA_HOME /opt/tomcat
+ENV CATALINA_BASE /opt/tomcat
 
 # サービス定義ファイルを移動
 #COPY tools/tomcat.service /etc/systemd/system/
