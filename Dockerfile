@@ -1,6 +1,13 @@
 # httpd-tomcat
 FROM openshift/base-centos7
 
+#arg parameter
+ARG MYSQL_HOSTNAME="mysqlServer"
+ARG MYSQL_IPADDRESS
+
+#hostname set
+RUN echo $MYSQL_IPADDRESS $MYSQL_HOSTNAME >> /etc/hosts
+
 # Here you can specify the maintainer for the image that you're building
 LABEL maintainer="Asuka Arakawa  <arakawa.asuka.jri@outlook.jp>"
 
