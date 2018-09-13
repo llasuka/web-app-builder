@@ -10,5 +10,6 @@
 source /etc/profile.d/java.sh
 source /etc/profile.d/tomcat.sh
 
-exec /opt/tomcat/bin/catalina.sh run > /opt/tomcat/logs/catalina.out
+exec /opt/tomcat/bin/catalina.sh run
+#exec /opt/tomcat/bin/catalina.sh run > /opt/tomcat/logs/catalina.out
 #exec /opt/tomcat/bin/catalina.sh run &> /opt/tomcat/logs/catalina.out
